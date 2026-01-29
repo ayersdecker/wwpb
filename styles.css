@@ -109,6 +109,10 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 
+.nav-menu a.active {
+    color: var(--bright-yellow);
+}
+
 .hamburger {
     display: none;
     flex-direction: column;
@@ -464,6 +468,13 @@ section {
 /* Form Styles */
 .form-group {
     margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: var(--black);
 }
 
 .form-group input,
