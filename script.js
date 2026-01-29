@@ -43,6 +43,78 @@ document.addEventListener('DOMContentLoaded', function() {
         rootMargin: '0px 0px -50px 0px'
     };
 
+    // ===================================
+    // Interactive Floating Props
+    // ===================================
+    const props = document.querySelectorAll('.prop');
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX / window.innerWidth;
+        mouseY = e.clientY / window.innerHeight;
+
+        props.forEach((prop, index) => {
+            const speed = (index + 1) * 0.5;
+            const x = (mouseX - 0.5) * 50 * speed;
+            const y = (mouseY - 0.5) * 50 * speed;
+            
+            prop.style.transform = `translate(${x}px, ${y}px)`;
+        });
+    });
+
+    // ===================================
+    // Scroll-based Parallax for Props
+    // ===================================
+    window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        props.forEach((prop, index) => {
+            const speed = (index % 3 + 1) * 0.2;
+            const yPos = -(scrolled * speed);
+            const currentTransform = prop.style.transform || '';
+            const translateMatch = currentTransform.match(/translate\(([^,]+),\s*([^)]+)\)/);
+            if (translateMatch) {
+                prop.style.transform = `translate(${translateMatch[1]}, calc(${translateMatch[2]} + ${yPos}px))`;
+            }
+        });
+    });
+
+    // ===================================
+    // Enhanced Scroll Reveal Animations
+    // ===================================
+    const scrollElements = {
+        '.section-header': 'scroll-reveal',
+        '.feature': 'scroll-scale',
+        '.service-card': 'scroll-fade-left',
+        '.gallery-item': 'scroll-fade-right',
+        '.about-text': 'scroll-fade-left',
+        '.contact-info': 'scroll-fade-left',
+        '.contact-form': 'scroll-fade-right'
+    };
+
+    Object.keys(scrollElements).forEach(selector => {
+        const elements = document.querySelectorAll(selector);
+        elements.forEach((el, index) => {
+            el.classList.add(scrollElements[selector]);
+            el.style.transitionDelay = `${index * 0.1}s`;
+        });
+    });
+
+    const scrollObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    });
+
+    document.querySelectorAll('.scroll-reveal, .scroll-fade-left, .scroll-fade-right, .scroll-scale').forEach(el => {
+        scrollObserver.observe(el);
+    });
+
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
