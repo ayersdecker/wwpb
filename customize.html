@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+        <!-- Developed by Decker Ayers / www.deckerayers.com -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Customize your Wright Way Photo Booth experience">
+    <title>Customize Your Photo Booth | Wright Way Photo Booths</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating Props Background -->
+    <div class="floating-props">
+        <span class="prop prop-1">🎭</span>
+        <span class="prop prop-2">🎩</span>
+        <span class="prop prop-3">👓</span>
+        <span class="prop prop-4">👔</span>
+        <span class="prop prop-5">🥸</span>
+        <span class="prop prop-6">🎭</span>
+        <span class="prop prop-7">👒</span>
+        <span class="prop prop-8">🕶️</span>
+        <span class="prop prop-9">🐝</span>
+        <span class="prop prop-10">🧢</span>
+        <span class="honeycomb honeycomb-1">⬡</span>
+        <span class="honeycomb honeycomb-2">⬡</span>
+        <span class="honeycomb honeycomb-3">⬡</span>
+        <span class="honeycomb honeycomb-4">⬡</span>
+        <span class="honeycomb honeycomb-5">⬡</span>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <span class="header-honeycomb header-honeycomb-1">⬡</span>
+        <span class="header-honeycomb header-honeycomb-2">⬡</span>
+        <span class="header-honeycomb header-honeycomb-3">⬡</span>
+        <nav class="nav">
+            <div class="container">
+                <div class="logo">
+                    <div class="logo-placeholder">📸</div>
+                    <h1><a href="index.html" style="color: inherit; text-decoration: none;">Wright Way Photo Booths</a></h1>
+                </div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#services">Services</a></li>
+                    <li><a href="index.html#gallery">Gallery</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="navMenu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Customize Section -->
+    <section id="customize" class="customize">
+        <div class="container">
+            <div class="section-header">
+                <h2>Customize Your Photo Booth</h2>
+                <div class="underline"></div>
+                <p class="section-subtitle">Personalize your photo booth experience with our customization options</p>
+            </div>
+
+            <div class="customize-container">
+                <!-- Theme Selection -->
+                <div class="customize-section">
+                    <h3 class="customize-heading">
+                        <span class="customize-icon">🎨</span>
+                        Choose Your Theme
+                    </h3>
+                    <div class="options-grid">
+                        <div class="option-card" data-option="theme" data-value="classic">
+                            <div class="option-preview theme-classic">
+                                <div class="preview-content">Classic</div>
+                            </div>
+                            <h4>Classic Elegance</h4>
+                            <p>Timeless black and white with gold accents</p>
+                        </div>
+                        <div class="option-card" data-option="theme" data-value="modern">
+                            <div class="option-preview theme-modern">
+                                <div class="preview-content">Modern</div>
+                            </div>
+                            <h4>Modern Minimal</h4>
+                            <p>Clean lines with vibrant colors</p>
+                        </div>
+                        <div class="option-card" data-option="theme" data-value="rustic">
+                            <div class="option-preview theme-rustic">
+                                <div class="preview-content">Rustic</div>
+                            </div>
+                            <h4>Rustic Charm</h4>
+                            <p>Warm wooden tones and natural elements</p>
+                        </div>
+                        <div class="option-card" data-option="theme" data-value="glamour">
+                            <div class="option-preview theme-glamour">
+                                <div class="preview-content">Glamour</div>
+                            </div>
+                            <h4>Hollywood Glamour</h4>
+                            <p>Luxurious gold and sparkle effects</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Background Selection -->
+                <div class="customize-section">
+                    <h3 class="customize-heading">
+                        <span class="customize-icon">🖼️</span>
+                        Select Your Background
+                    </h3>
+                    <div class="options-grid">
+                        <div class="option-card" data-option="background" data-value="solid">
+                            <div class="option-preview bg-solid">
+                                <div class="preview-content">Solid</div>
+                            </div>
+                            <h4>Solid Colors</h4>
+                            <p>Choose from our color palette</p>
+                        </div>
+                        <div class="option-card" data-option="background" data-value="sequin">
+                            <div class="option-preview bg-sequin">
+                                <div class="preview-content">✨</div>
+                            </div>
+                            <h4>Sequin Wall</h4>
+                            <p>Sparkly and eye-catching</p>
+                        </div>
+                        <div class="option-card" data-option="background" data-value="floral">
+                            <div class="option-preview bg-floral">
+                                <div class="preview-content">🌸</div>
+                            </div>
+                            <h4>Floral Wall</h4>
+                            <p>Beautiful flower arrangements</p>
+                        </div>
+                        <div class="option-card" data-option="background" data-value="custom">
+                            <div class="option-preview bg-custom">
+                                <div class="preview-content">🎭</div>
+                            </div>
+                            <h4>Custom Backdrop</h4>
+                            <p>Bring your own design</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Props Selection -->
+                <div class="customize-section">
+                    <h3 class="customize-heading">
+                        <span class="customize-icon">🎭</span>
+                        Choose Your Props
+                    </h3>
+                    <div class="props-container">
+                        <label class="prop-checkbox">
+                            <input type="checkbox" value="classic" checked>
+                            <span class="checkmark"></span>
+                            <div class="prop-item">
+                                <span class="prop-emoji">👓</span>
+                                <span class="prop-name">Classic Props</span>
+                                <small>Glasses, hats, mustaches</small>
+                            </div>
+                        </label>
+                        <label class="prop-checkbox">
+                            <input type="checkbox" value="signs">
+                            <span class="checkmark"></span>
+                            <div class="prop-item">
+                                <span class="prop-emoji">💭</span>
+                                <span class="prop-name">Speech Bubbles</span>
+                                <small>Custom messages and quotes</small>
+                            </div>
+                        </label>
+                        <label class="prop-checkbox">
+                            <input type="checkbox" value="themed">
+                            <span class="checkmark"></span>
+                            <div class="prop-item">
+                                <span class="prop-emoji">🎉</span>
+                                <span class="prop-name">Themed Props</span>
+                                <small>Match your event theme</small>
+                            </div>
+                        </label>
+                        <label class="prop-checkbox">
+                            <input type="checkbox" value="premium">
+                            <span class="checkmark"></span>
+                            <div class="prop-item">
+                                <span class="prop-emoji">👑</span>
+                                <span class="prop-name">Premium Props</span>
+                                <small>High-quality custom items</small>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Print Layout Selection -->
+                <div class="customize-section">
+                    <h3 class="customize-heading">
+                        <span class="customize-icon">🖨️</span>
+                        Print Layout
+                    </h3>
+                    <div class="options-grid">
+                        <div class="option-card" data-option="layout" data-value="strip">
+                            <div class="option-preview layout-strip">
+                                <div class="preview-layout">
+                                    <div class="layout-box"></div>
+                                    <div class="layout-box"></div>
+                                    <div class="layout-box"></div>
+                                    <div class="layout-box"></div>
+                                </div>
+                            </div>
+                            <h4>Classic Strip</h4>
+                            <p>4 vertical photos</p>
+                        </div>
+                        <div class="option-card" data-option="layout" data-value="postcard">
+                            <div class="option-preview layout-postcard">
+                                <div class="preview-layout postcard-layout">
+                                    <div class="layout-box large"></div>
+                                    <div class="layout-text">Your Event</div>
+                                </div>
+                            </div>
+                            <h4>Postcard</h4>
+                            <p>Single 4x6 photo with custom text</p>
+                        </div>
+                        <div class="option-card" data-option="layout" data-value="collage">
+                            <div class="option-preview layout-collage">
+                                <div class="preview-layout collage-layout">
+                                    <div class="layout-box"></div>
+                                    <div class="layout-box"></div>
+                                    <div class="layout-box"></div>
+                                </div>
+                            </div>
+                            <h4>Collage</h4>
+                            <p>3 photos in creative arrangement</p>
+                        </div>
+                        <div class="option-card" data-option="layout" data-value="gif">
+                            <div class="option-preview layout-gif">
+                                <div class="preview-layout gif-layout">
+                                    <div class="gif-icon">GIF</div>
+                                </div>
+                            </div>
+                            <h4>Animated GIF</h4>
+                            <p>Digital animated photo series</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Text -->
+                <div class="customize-section">
+                    <h3 class="customize-heading">
+                        <span class="customize-icon">✏️</span>
+                        Add Custom Text
+                    </h3>
+                    <div class="custom-text-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="event-name">Event Name</label>
+                                <input type="text" id="event-name" placeholder="e.g., Sarah & John's Wedding" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="event-date">Event Date</label>
+                                <input type="date" id="event-date" placeholder="Select your event date">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="custom-message">Custom Message</label>
+                            <textarea id="custom-message" placeholder="Add a special message or hashtag" rows="3" maxlength="100"></textarea>
+                            <small class="char-count">0 / 100</small>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="customize-section preview-section">
+                    <h3 class="customize-heading">
+                        <span class="customize-icon">👁️</span>
+                        Your Selection Preview
+                    </h3>
+                    <div class="preview-card">
+                        <div class="preview-details">
+                            <div class="preview-item">
+                                <strong>Theme:</strong> <span id="selected-theme">Not selected</span>
+                            </div>
+                            <div class="preview-item">
+                                <strong>Background:</strong> <span id="selected-background">Not selected</span>
+                            </div>
+                            <div class="preview-item">
+                                <strong>Props:</strong> <span id="selected-props">Classic Props</span>
+                            </div>
+                            <div class="preview-item">
+                                <strong>Layout:</strong> <span id="selected-layout">Not selected</span>
+                            </div>
+                            <div class="preview-item">
+                                <strong>Event Name:</strong> <span id="preview-event-name">-</span>
+                            </div>
+                        </div>
+                        <div class="preview-actions">
+                            <button class="btn btn-secondary" id="reset-btn">Reset All</button>
+                            <button class="btn btn-primary" id="generate-code-btn">Generate Config Code</button>
+                        </div>
+                        
+                        <!-- Config Code Box (Hidden by default) -->
+                        <div class="config-code-box" id="config-code-box" style="display: none;">
+                            <div class="config-code-header">
+                                <strong>Your Configuration Code:</strong>
+                                <p>Copy this code and include it in your message when contacting us</p>
+                            </div>
+                            <div class="config-code-display">
+                                <code id="config-code-text"></code>
+                            </div>
+                            <div class="config-code-actions">
+                                <button class="btn btn-primary" id="copy-code-btn">
+                                    <span id="copy-icon">📋</span> Copy Code
+                                </button>
+                                <a href="index.html#contact" class="btn btn-secondary">Go to Contact Form</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Wright Way Photo Booths. All rights reserved.</p>
+            <p>Creating memorable moments, one photo at a time.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -157,35 +157,45 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // ===================================
 const contactForm = document.getElementById('contactForm');
 
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Get form values
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const phone = document.getElementById('phone').value;
-    const message = document.getElementById('message').value;
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+        const configCode = document.getElementById('config-code').value;
+        const message = document.getElementById('message').value;
 
-    // Basic validation
-    if (!name || !email || !message) {
-        alert('Please fill in all required fields.');
-        return;
-    }
+        // Basic validation
+        if (!name || !email || !message) {
+            alert('Please fill in all required fields.');
+            return;
+        }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        alert('Please enter a valid email address.');
-        return;
-    }
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
 
-    // Since this is a static site, show a success message
-    // In a real implementation, this would send data to a server
-    alert(`Thank you, ${name}! Your message has been received. We'll get back to you soon at ${email}.`);
-    
-    // Reset form
-    contactForm.reset();
-});
+        // Build success message
+        let successMessage = `Thank you, ${name}! Your message has been received. We'll get back to you soon at ${email}.`;
+        
+        if (configCode && configCode.trim()) {
+            successMessage += '\n\nWe received your configuration code.';
+        }
+
+        // Since this is a static site, show a success message
+        // In a real implementation, this would send data to a server
+        alert(successMessage);
+        
+        // Reset form
+        contactForm.reset();
+    });
+}
 
 // ===================================
 // Active Navigation Link with Throttle
@@ -218,3 +228,311 @@ window.addEventListener('scroll', function() {
         }, 100);
     }
 });
+
+// ===================================
+// Customization Page Functionality
+// ===================================
+(function() {
+    // Only run on customize page
+    if (!document.getElementById('customize')) {
+        return;
+    }
+
+    // Store selected options
+    const selections = {
+        theme: null,
+        background: null,
+        props: ['classic'],
+        layout: null,
+        eventName: '',
+        eventDate: '',
+        customMessage: ''
+    };
+
+    // Wait for DOM to be ready
+    function init() {
+        console.log('Initializing customization page...');
+        
+        // Option card selection
+        const optionCards = document.querySelectorAll('.option-card');
+        console.log('Found option cards:', optionCards.length);
+        
+        optionCards.forEach(card => {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                const option = this.dataset.option;
+                const value = this.dataset.value;
+                
+                console.log('Clicked card:', option, value);
+
+                // Remove selected class from siblings
+                const siblings = this.parentElement.querySelectorAll('.option-card');
+                siblings.forEach(sibling => sibling.classList.remove('selected'));
+
+                // Add selected class to this card
+                this.classList.add('selected');
+
+                // Update selections
+                selections[option] = value;
+                console.log('Updated selections:', selections);
+
+                // Update preview
+                updatePreview();
+            });
+        });
+
+        // Props checkbox handling
+        const propCheckboxes = document.querySelectorAll('.prop-checkbox input[type="checkbox"]');
+        console.log('Found prop checkboxes:', propCheckboxes.length);
+        
+        propCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const value = this.value;
+                if (this.checked) {
+                    if (!selections.props.includes(value)) {
+                        selections.props.push(value);
+                    }
+                } else {
+                    const index = selections.props.indexOf(value);
+                    if (index > -1) {
+                        selections.props.splice(index, 1);
+                    }
+                }
+                updatePreview();
+            });
+        });
+
+        // Text input handling
+        const eventNameInput = document.getElementById('event-name');
+        const eventDateInput = document.getElementById('event-date');
+        const customMessageInput = document.getElementById('custom-message');
+
+        if (eventNameInput) {
+            eventNameInput.addEventListener('input', function() {
+                selections.eventName = this.value;
+                updatePreview();
+            });
+        }
+
+        if (eventDateInput) {
+            eventDateInput.addEventListener('change', function() {
+                selections.eventDate = this.value;
+                updatePreview();
+            });
+        }
+
+        if (customMessageInput) {
+            customMessageInput.addEventListener('input', function() {
+                selections.customMessage = this.value;
+                updateCharCount(this);
+                updatePreview();
+            });
+        }
+
+        // Character count for custom message
+        function updateCharCount(textarea) {
+            const charCount = textarea.parentElement.querySelector('.char-count');
+            if (charCount) {
+                const currentLength = textarea.value.length;
+                const maxLength = textarea.getAttribute('maxlength');
+                charCount.textContent = `${currentLength} / ${maxLength}`;
+            }
+        }
+
+        // Update preview section
+        function updatePreview() {
+            const themeDisplay = document.getElementById('selected-theme');
+            const backgroundDisplay = document.getElementById('selected-background');
+            const propsDisplay = document.getElementById('selected-props');
+            const layoutDisplay = document.getElementById('selected-layout');
+            const eventNameDisplay = document.getElementById('preview-event-name');
+
+            if (themeDisplay) {
+                themeDisplay.textContent = selections.theme ? 
+                    selections.theme.charAt(0).toUpperCase() + selections.theme.slice(1) : 
+                    'Not selected';
+            }
+
+            if (backgroundDisplay) {
+                backgroundDisplay.textContent = selections.background ? 
+                    selections.background.charAt(0).toUpperCase() + selections.background.slice(1) : 
+                    'Not selected';
+            }
+
+            if (propsDisplay) {
+                propsDisplay.textContent = selections.props.length > 0 ? 
+                    selections.props.map(p => p.charAt(0).toUpperCase() + p.slice(1)).join(', ') : 
+                    'None selected';
+            }
+
+            if (layoutDisplay) {
+                layoutDisplay.textContent = selections.layout ? 
+                    selections.layout.charAt(0).toUpperCase() + selections.layout.slice(1) : 
+                    'Not selected';
+            }
+
+            if (eventNameDisplay) {
+                eventNameDisplay.textContent = selections.eventName || '-';
+            }
+        }
+
+        // Reset button
+        const resetBtn = document.getElementById('reset-btn');
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function() {
+                // Reset selections
+                selections.theme = null;
+                selections.background = null;
+                selections.props = ['classic'];
+                selections.layout = null;
+                selections.eventName = '';
+                selections.eventDate = '';
+                selections.customMessage = '';
+
+                // Reset UI
+                optionCards.forEach(card => card.classList.remove('selected'));
+                
+                propCheckboxes.forEach(checkbox => {
+                    checkbox.checked = checkbox.value === 'classic';
+                });
+
+                if (eventNameInput) eventNameInput.value = '';
+                if (eventDateInput) eventDateInput.value = '';
+                if (customMessageInput) {
+                    customMessageInput.value = '';
+                    updateCharCount(customMessageInput);
+                }
+
+                // Hide config code section
+                const configBox = document.getElementById('config-code-box');
+                if (configBox) {
+                    configBox.style.display = 'none';
+                }
+
+                updatePreview();
+
+                // Show feedback
+                alert('All selections have been reset!');
+            });
+        }
+
+        // Generate Config Code button
+        const generateCodeBtn = document.getElementById('generate-code-btn');
+        console.log('Generate button found:', !!generateCodeBtn);
+        
+        if (generateCodeBtn) {
+            generateCodeBtn.addEventListener('click', function() {
+                console.log('Generate button clicked!');
+                // No validation - allow partial selections
+                // Generate config code with whatever is selected
+                const configCode = generateConfigCode(selections);
+                console.log('Generated code:', configCode);
+
+                // Display config code
+                const configCodeText = document.getElementById('config-code-text');
+                const configBox = document.getElementById('config-code-box');
+                
+                console.log('Config elements:', !!configCodeText, !!configBox);
+                
+                if (configCodeText && configBox) {
+                    configCodeText.textContent = configCode;
+                    configBox.style.display = 'block';
+                    
+                    // Smooth animation
+                    configBox.style.animation = 'slideIn 0.5s ease-out';
+                    console.log('Config code displayed!');
+                }
+            });
+        }
+
+        // Copy config code button
+        const copyCodeBtn = document.getElementById('copy-code-btn');
+        if (copyCodeBtn) {
+            copyCodeBtn.addEventListener('click', function() {
+                const configCodeText = document.getElementById('config-code-text');
+                const copyIcon = document.getElementById('copy-icon');
+                
+                if (configCodeText) {
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(configCodeText.textContent).then(() => {
+                        // Update button to show success
+                        const originalText = copyCodeBtn.innerHTML;
+                        copyCodeBtn.innerHTML = '<span>✅</span> Copied!';
+                        copyCodeBtn.style.backgroundColor = '#4CAF50';
+                        
+                        // Reset button after 2 seconds
+                        setTimeout(() => {
+                            copyCodeBtn.innerHTML = originalText;
+                            copyCodeBtn.style.backgroundColor = '';
+                        }, 2000);
+                    }).catch(err => {
+                        alert('Failed to copy code. Please select and copy it manually.');
+                    });
+                }
+            });
+        }
+
+        // Generate a configuration code from selections
+        function generateConfigCode(selections) {
+            console.log('Generating code from:', selections);
+            // Create a compact code format
+            const parts = [];
+        
+        // Theme code (first letter uppercase)
+        if (selections.theme) {
+            parts.push(`T:${selections.theme.charAt(0).toUpperCase()}`);
+        }
+        
+        // Background code (first letter uppercase)
+        if (selections.background) {
+            parts.push(`B:${selections.background.charAt(0).toUpperCase()}`);
+        }
+        
+        // Props codes (first letters)
+        if (selections.props && selections.props.length > 0) {
+            const propCodes = selections.props.map(p => p.charAt(0).toUpperCase()).join('');
+            parts.push(`P:${propCodes}`);
+        }
+        
+        // Layout code (first letter uppercase)
+        if (selections.layout) {
+            parts.push(`L:${selections.layout.charAt(0).toUpperCase()}`);
+        }
+        
+        // Event name (if provided)
+        if (selections.eventName && selections.eventName.trim()) {
+            parts.push(`E:${selections.eventName.trim()}`);
+        }
+        
+        // Event date (if provided)
+        if (selections.eventDate) {
+            parts.push(`D:${selections.eventDate}`);
+        }
+        
+        // Custom message (if provided)
+        if (selections.customMessage && selections.customMessage.trim()) {
+            parts.push(`M:${selections.customMessage.trim()}`);
+        }
+        
+        // Create human-readable version - handle empty selections
+        if (parts.length === 0) {
+            return 'WWPB-NONE (No selections made yet)';
+        }
+        
+        const code = `WWPB-${parts.join('|')}`;
+        
+        console.log('Generated code:', code);
+        return code;
+        }
+
+        // Initialize preview
+        updatePreview();
+    }
+
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
