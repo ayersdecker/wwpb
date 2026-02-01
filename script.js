@@ -536,3 +536,83 @@ window.addEventListener('scroll', function() {
         init();
     }
 })();
+
+// ===================================
+// Testimonials Slider
+// ===================================
+(function() {
+    const testimonialItems = document.querySelectorAll('.testimonial-item');
+    const dotsContainer = document.querySelector('.testimonial-dots');
+    
+    if (!testimonialItems.length || !dotsContainer) return;
+    
+    let currentIndex = 0;
+    const slideInterval = 7000; // 7 seconds per testimonial
+    let autoSlideTimer;
+    
+    // Create dots
+    testimonialItems.forEach((_, index) => {
+        const dot = document.createElement('div');
+        dot.classList.add('testimonial-dot');
+        if (index === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+    
+    const dots = document.querySelectorAll('.testimonial-dot');
+    const prevArrow = document.querySelector('.testimonial-arrow-left');
+    const nextArrow = document.querySelector('.testimonial-arrow-right');
+    
+    function goToSlide(index) {
+        // Remove active class from current items
+        testimonialItems[currentIndex].classList.remove('active');
+        dots[currentIndex].classList.remove('active');
+        
+        // Add active class to new items
+        currentIndex = index;
+        testimonialItems[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
+        
+        // Reset auto-slide timer
+        clearInterval(autoSlideTimer);
+        startAutoSlide();
+    }
+    
+    function nextSlide() {
+        const nextIndex = (currentIndex + 1) % testimonialItems.length;
+        goToSlide(nextIndex);
+    }
+    
+    function prevSlide() {
+        const prevIndex = (currentIndex - 1 + testimonialItems.length) % testimonialItems.length;
+        goToSlide(prevIndex);
+    }
+    
+    function startAutoSlide() {
+        autoSlideTimer = setInterval(nextSlide, slideInterval);
+    }
+    
+    // Arrow click handlers
+    if (prevArrow) {
+        prevArrow.addEventListener('click', prevSlide);
+    }
+    
+    if (nextArrow) {
+        nextArrow.addEventListener('click', nextSlide);
+    }
+    
+    // Start auto-sliding
+    startAutoSlide();
+    
+    // Pause on hover
+    const testimonialSlider = document.querySelector('.testimonial-slider');
+    if (testimonialSlider) {
+        testimonialSlider.addEventListener('mouseenter', () => {
+            clearInterval(autoSlideTimer);
+        });
+        
+        testimonialSlider.addEventListener('mouseleave', () => {
+            startAutoSlide();
+        });
+    }
+})();
