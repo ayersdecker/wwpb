@@ -240,6 +240,7 @@ h1, h2, h3, h4, h5, h6 {
     top: 0;
     z-index: 1000;
     overflow: hidden;
+    border-bottom: 3px solid var(--primary-yellow);
 }
 
 /* Header Honeycombs */
@@ -277,6 +278,33 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.8rem;
 }
 
+.header-honeycomb-4 {
+    left: 25%;
+    top: 30%;
+    transform: translateY(-50%) rotate(-10deg);
+    animation: headerFloat 9s infinite ease-in-out;
+    animation-delay: 1s;
+    font-size: 1.3rem;
+}
+
+.header-honeycomb-5 {
+    right: 35%;
+    top: 70%;
+    transform: translateY(-50%) rotate(35deg);
+    animation: headerFloat 7.5s infinite ease-in-out;
+    animation-delay: 3s;
+    font-size: 1.6rem;
+}
+
+.header-honeycomb-6 {
+    right: 5%;
+    top: 25%;
+    transform: translateY(-50%) rotate(-25deg);
+    animation: headerFloat 8.5s infinite ease-in-out;
+    animation-delay: 5s;
+    font-size: 1.4rem;
+}
+
 @keyframes headerFloat {
     0%, 100% {
         transform: translateY(-50%) rotate(0deg) scale(1);
@@ -310,6 +338,30 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     align-items: center;
     gap: 1rem;
+    position: relative;
+}
+
+.logo::after {
+    content: '⬡';
+    position: absolute;
+    color: var(--primary-yellow);
+    font-size: 0.8rem;
+    opacity: 0.4;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.4;
+        transform: translateY(-50%) rotate(45deg) scale(1);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(-50%) rotate(45deg) scale(1.2);
+    }
 }
 
 .logo-placeholder {
@@ -545,12 +597,34 @@ section {
 .section-header {
     text-align: center;
     margin-bottom: 3rem;
+    position: relative;
+}
+
+.section-header::before,
+.section-header::after {
+    content: '⬡';
+    position: absolute;
+    color: var(--primary-yellow);
+    font-size: 1.5rem;
+    opacity: 0.3;
+    top: 0;
+}
+
+.section-header::before {
+    left: 50%;
+    transform: translateX(-100px) rotate(15deg);
+}
+
+.section-header::after {
+    right: 50%;
+    transform: translateX(100px) rotate(-15deg);
 }
 
 .section-header h2 {
     font-size: 2.5rem;
     color: var(--black);
     margin-bottom: 1rem;
+    position: relative;
 }
 
 .underline {
@@ -558,6 +632,28 @@ section {
     height: 4px;
     background: linear-gradient(90deg, var(--primary-yellow) 0%, var(--bright-yellow) 100%);
     margin: 0 auto;
+    position: relative;
+}
+
+.underline::before,
+.underline::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 2px;
+    background: var(--primary-yellow);
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.underline::before {
+    right: 100%;
+    margin-right: 10px;
+}
+
+.underline::after {
+    left: 100%;
+    margin-left: 10px;
 }
 
 /* ===================================
@@ -565,6 +661,30 @@ section {
    =================================== */
 .about {
     background-color: transparent;
+    position: relative;
+}
+
+.about::before {
+    content: '⬡';
+    position: absolute;
+    right: 12%;
+    top: 25%;
+    font-size: 3.5rem;
+    color: var(--primary-yellow);
+    opacity: 0.08;
+    transform: rotate(-30deg);
+}
+
+.about::after {
+    content: '⬡⬡';
+    position: absolute;
+    left: 8%;
+    bottom: 30%;
+    font-size: 2rem;
+    color: var(--primary-yellow);
+    opacity: 0.08;
+    transform: rotate(20deg);
+    letter-spacing: 1rem;
 }
 
 .about-content {
@@ -683,13 +803,33 @@ section {
    =================================== */
 .services {
     background-color: transparent;
+    position: relative;
+}
+
+.services::before {
+    content: '⬡';
+    position: absolute;
+    left: 5%;
+    top: 10%;
+    font-size: 4rem;
+    color: var(--primary-yellow);
+    opacity: 0.08;
+    transform: rotate(15deg);
+}
+
+.services::after {
+    content: '⬡';
+    position: absolute;
+    right: 8%;
+    bottom: 15%;
+    font-size: 3.5rem;
+    color: var(--primary-yellow);
+    opacity: 0.08;
+    transform: rotate(-20deg);
 }
 
 .services-content {
-    display: grid;
-    grid-template-columns: 1fr 400px;
-    gap: 3rem;
-    align-items: start;
+    display: block;
 }
 
 .services-grid {
@@ -723,7 +863,8 @@ section {
 }
 
 .services-pricing {
-    /* Normal scroll behavior */
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .services-pricing .pricing-header h3 {
@@ -746,6 +887,43 @@ section {
     .services-grid {
         grid-template-columns: 1fr;
     }
+}
+
+/* ===================================
+   Book Section
+   =================================== */
+.book {
+    background-color: var(--white);
+    padding: 5rem 0;
+    position: relative;
+}
+
+.book::before {
+    content: '⬡⬡⬡';
+    position: absolute;
+    left: 2%;
+    top: 50%;
+    font-size: 2rem;
+    color: var(--primary-yellow);
+    opacity: 0.1;
+    transform: translateY(-50%);
+    letter-spacing: 1rem;
+}
+
+.book::after {
+    content: '⬡⬡⬡';
+    position: absolute;
+    right: 2%;
+    top: 50%;
+    font-size: 2rem;
+    color: var(--primary-yellow);
+    opacity: 0.1;
+    transform: translateY(-50%);
+    letter-spacing: 1rem;
+}
+
+.book .section-header h2 {
+    color: #ffffff;
 }
 
 /* ===================================
@@ -774,7 +952,7 @@ section {
 .booking-widget {
     max-width: 800px;
     margin: 0 auto;
-    background-color: #e0e0e0;
+    background-color: #ffffff;
     padding: 2rem;
     border-radius: 10px;
 }
@@ -908,6 +1086,32 @@ section {
 .gallery {
     background-color: transparent;
     padding: 6rem 0;
+    position: relative;
+}
+
+.gallery::before {
+    content: '⬡';
+    position: absolute;
+    right: 10%;
+    top: 20%;
+    font-size: 3rem;
+    color: var(--primary-yellow);
+    opacity: 0.1;
+    transform: rotate(25deg);
+    animation: floatSlow 10s infinite ease-in-out;
+}
+
+.gallery::after {
+    content: '⬡';
+    position: absolute;
+    left: 5%;
+    bottom: 20%;
+    font-size: 2.5rem;
+    color: var(--primary-yellow);
+    opacity: 0.1;
+    transform: rotate(-15deg);
+    animation: floatSlow 12s infinite ease-in-out;
+    animation-delay: 3s;
 }
 
 .gallery .container {
@@ -1271,6 +1475,31 @@ section {
    =================================== */
 .contact {
     background-color: transparent;
+    position: relative;
+}
+
+.contact::before {
+    content: '⬡⬡';
+    position: absolute;
+    left: 3%;
+    top: 15%;
+    font-size: 2.5rem;
+    color: var(--primary-yellow);
+    opacity: 0.08;
+    transform: rotate(30deg);
+    letter-spacing: 2rem;
+}
+
+.contact::after {
+    content: '⬡⬡';
+    position: absolute;
+    right: 5%;
+    bottom: 20%;
+    font-size: 2rem;
+    color: var(--primary-yellow);
+    opacity: 0.08;
+    transform: rotate(-25deg);
+    letter-spacing: 1.5rem;
 }
 
 .contact-content {
@@ -1399,6 +1628,20 @@ section {
     color: var(--black);
     text-align: center;
     padding: 2rem 0;
+    border-top: 3px solid var(--primary-yellow);
+    position: relative;
+}
+
+.footer::before {
+    content: '⬡ ⬡ ⬡';
+    position: absolute;
+    left: 50%;
+    top: -15px;
+    transform: translateX(-50%);
+    font-size: 1.2rem;
+    color: var(--primary-yellow);
+    opacity: 0.6;
+    letter-spacing: 2rem;
 }
 
 .footer p {
@@ -2213,7 +2456,6 @@ section {
 }
 
 .manage-booking iframe {
-    filter: invert(1) hue-rotate(180deg) brightness(1.1);
     background: transparent;
 }
 
@@ -2222,7 +2464,6 @@ section {
 .services-pricing,
 .contact-form > div:has(iframe),
 .manage-booking > .booking-widget {
-    background: rgba(58, 58, 58, 0.3);
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
